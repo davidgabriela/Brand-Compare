@@ -8,7 +8,7 @@ const PORT = 3000
 const API_KEY = 'API_KEY_TEST'
 const URL = 'https://app.socialinsider.io/api'
 
-async function getData() {
+app.get('/', async (req, res) => {
   let brands = await getBrands()
 
   const brandData = await Promise.all(
@@ -74,9 +74,8 @@ async function getData() {
     }),
   )
 
-  console.log(brandData)
-  return brandData
-}
+  res.json(brandData)
+})
 
 async function getBrands() {
   const config = {
@@ -117,10 +116,6 @@ async function getProfileData(profileId, type, date) {
   const response = await axios.post(URL, data, config)
   return response.data.resp[profileId]
 }
-
-// getBrands()
-// getProfileData(44596321012, 'facebook_page', 1608209422374, 1639745412436)
-getData()
 
 app.listen(PORT, HOST, () => {
   console.log(`Server running at http://${HOST}:${PORT}/`)

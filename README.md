@@ -3,7 +3,7 @@ Came across a bug: Using get_profile_data for a twitter account has unexpected b
 1. The fields: followers, following and following_change disappear on the entry corresponding to end date. 
 2. Besides the entries for the days in the given range, more entries for days that are not in the range appear in the following format '[other_date]': { date: '[other_date]', following_change: 0 }
 
-Similar behaviour was found for instagram_profile for some start-end ranges. For the following request:
+Similar behaviour was found for instagram_profile for some ranges. For the following request:
 {
     "id" : 1,
     "method" : "socialinsider_api.get_profile_data",
