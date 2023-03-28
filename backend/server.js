@@ -66,7 +66,7 @@ app.get('/', async (req, res) => {
       )
       const data = {
         brandName,
-        brandProfiles: brandProfiles.length,
+        totalProfiles: brandProfiles.length,
         totalFans,
         totalEngagement,
       }
