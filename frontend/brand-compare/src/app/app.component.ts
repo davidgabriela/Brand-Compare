@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-export interface Brand {
-  name: string;
-  totalProfiles: number;
-  totalFans: number;
-  totalEngagement: number;
-}
+import { Observable } from 'rxjs';
+import { Brand } from './Brand';
+import { BrandsService } from './services/brands.service';
 
 const ELEMENT_DATA: Brand[] = [
   { name: 'Nike', totalProfiles: 2, totalFans: 1000, totalEngagement: 4000 },
@@ -31,7 +27,9 @@ const ELEMENT_DATA: Brand[] = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  brands$: Observable<Brand[]> = new Observable();
+
   displayedColumns: string[] = [
     'name',
     'totalProfiles',
@@ -44,4 +42,14 @@ export class AppComponent {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+
+  constructor(private brandsService: BrandsService) {}
+
+  ngOnInit() {
+    this.getBrands();
+  }
+
+  getBrands(): void {
+    this.brands$ = this.brandsService.getBrands();
+  }
 }

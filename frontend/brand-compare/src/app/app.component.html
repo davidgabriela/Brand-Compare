@@ -11,6 +11,7 @@
   </mat-form-field>
 
   <pre>Selected range: {{ range.value | json }}</pre>
+  <pre>brands: {{ brands$ | async | json }}</pre>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
