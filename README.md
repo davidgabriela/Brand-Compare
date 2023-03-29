@@ -1,4 +1,25 @@
-Came across a bug: Using get_profile_data for a twitter account has unexpected behaviour:
+# Running project
+
+In two seperate terminals:
+
+```
+cd backend
+npm i
+npm run start
+```
+```
+cd frontend
+npm i
+cd brand-compare
+ng serve
+```
+
+In you browser, navigate to http://localhost:4200/
+
+
+# Encountered issues
+
+Using get_profile_data for a twitter account has unexpected behaviour:
 
 1. The fields: followers, following and following_change disappear on the entry corresponding to end date. 
 2. Besides the entries for the days in the given range, more entries for days that are not in the range appear in the following format '[other_date]': { date: '[other_date]', following_change: 0 }
