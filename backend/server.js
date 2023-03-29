@@ -1,14 +1,12 @@
 const express = require('express')
-const axios = require('axios')
+const { getBrands, getProfileData } = require('./utils')
 
 const app = express()
 
 const HOST = '127.0.0.1'
 const PORT = 3000
-const API_KEY = 'API_KEY_TEST'
-const URL = 'https://app.socialinsider.io/api'
 
-app.get('/', async (req, res) => {
+app.get('/brands', async (req, res) => {
   let brands = await getBrands()
 
   const brandData = await Promise.all(
@@ -76,46 +74,6 @@ app.get('/', async (req, res) => {
 
   res.json(brandData)
 })
-
-async function getBrands() {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
-    },
-  }
-  const data = {
-    jsonrpc: '2.0',
-    id: 0,
-    method: 'socialinsider_api.get_brands',
-    params: {
-      projectname: 'API_test',
-    },
-  }
-  const response = await axios.post(URL, data, config)
-  return response.data.result
-}
-
-async function getProfileData(profileId, type, date) {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
-    },
-  }
-  const data = {
-    jsonrpc: '2.0',
-    id: 0,
-    method: 'socialinsider_api.get_profile_data',
-    params: {
-      id: profileId,
-      profile_type: type,
-      date,
-    },
-  }
-  const response = await axios.post(URL, data, config)
-  return response.data.resp[profileId]
-}
 
 app.listen(PORT, HOST, () => {
   console.log(`Server running at http://${HOST}:${PORT}/`)
