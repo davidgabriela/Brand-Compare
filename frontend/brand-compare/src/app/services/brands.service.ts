@@ -11,7 +11,17 @@ export class BrandsService {
 
   constructor(private http: HttpClient) {}
 
-  getBrands(): Observable<Brand[]> {
-    return this.http.get<Brand[]>(this.URL);
+  getBrands(
+    startDate: Date | null | undefined,
+    endDate: Date | null | undefined
+  ): Observable<Brand[]> {
+    let start = null;
+    let end = null;
+    if (startDate && endDate) {
+      start = new Date(startDate).getTime();
+      end = new Date(endDate).getTime();
+    }
+    console.log(`${this.URL}?start=${start}&end=${end}`);
+    return this.http.get<Brand[]>(`${this.URL}?start=${start}&end=${end}`);
   }
 }

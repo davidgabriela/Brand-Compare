@@ -20,47 +20,54 @@ app.get('/brands', async (req, res) => {
       let START = parseInt(req.query.start)
       let END = parseInt(req.query.end)
 
-      await Promise.all(
-        brandProfiles.map(async (profile) => {
-          const profileId = profile.id
-          const profileType = profile.profile_type
-          const date = {
-            start: START,
-            end: END,
-            timezone: 'Europe/London',
-          }
-          const profileData = await getProfileData(profileId, profileType, date)
-          let days = Object.keys(profileData)
-
-          // Keep only the entries from the date range
-          days = days.filter((day) => {
-            const dayDate = new Date(day.split('-').reverse().join('-'))
-            const startDate = new Date(START)
-            const endDate = new Date(END)
-
-            dayDate.setHours(0, 0, 0, 0)
-            startDate.setHours(0, 0, 0, 0)
-            endDate.setHours(0, 0, 0, 0)
-
-            return (
-              dayDate.getTime() >= startDate.getTime() &&
-              dayDate.getTime() <= endDate.getTime()
+      if (START && END) {
+        await Promise.all(
+          brandProfiles.map(async (profile) => {
+            const profileId = profile.id
+            const profileType = profile.profile_type
+            const date = {
+              start: START,
+              end: END,
+              timezone: 'Europe/London',
+            }
+            const profileData = await getProfileData(
+              profileId,
+              profileType,
+              date,
             )
-          })
+            let days = Object.keys(profileData)
 
-          totalFans = days.reduce((total, day) => {
-            if ('followers' in profileData[day])
-              return total + profileData[day].followers
-            else return total
-          }, totalFans)
+            // Keep only the entries from the date range
+            days = days.filter((day) => {
+              const dayDate = new Date(day.split('-').reverse().join('-'))
+              const startDate = new Date(START)
+              const endDate = new Date(END)
 
-          totalEngagement = days.reduce((total, day) => {
-            if ('engagement' in profileData[day]) {
-              return total + profileData[day].engagement
-            } else return total
-          }, totalEngagement)
-        }),
-      )
+              dayDate.setHours(0, 0, 0, 0)
+              startDate.setHours(0, 0, 0, 0)
+              endDate.setHours(0, 0, 0, 0)
+
+              return (
+                dayDate.getTime() >= startDate.getTime() &&
+                dayDate.getTime() <= endDate.getTime()
+              )
+            })
+
+            totalFans = days.reduce((total, day) => {
+              if ('followers' in profileData[day])
+                return total + profileData[day].followers
+              else return total
+            }, totalFans)
+
+            totalEngagement = days.reduce((total, day) => {
+              if ('engagement' in profileData[day]) {
+                return total + profileData[day].engagement
+              } else return total
+            }, totalEngagement)
+          }),
+        )
+      }
+
       const data = {
         brandName,
         totalProfiles: brandProfiles.length,
