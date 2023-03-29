@@ -1,4 +1,4 @@
-# Running project
+# Running the project
 
 In two seperate terminals:
 
@@ -11,9 +11,9 @@ npm run start
 cd frontend
 npm i
 cd brand-compare
-ng serve
+npm start
 ```
-
+npm 
 In you browser, navigate to http://localhost:4200/
 
 
