@@ -17,8 +17,8 @@ app.get('/brands', async (req, res) => {
       let totalFans = 0
       let totalEngagement = 0
 
-      const START = 1608209422374
-      const END = 1608299422374
+      let START = parseInt(req.query.start)
+      let END = parseInt(req.query.end)
 
       await Promise.all(
         brandProfiles.map(async (profile) => {
@@ -29,7 +29,6 @@ app.get('/brands', async (req, res) => {
             end: END,
             timezone: 'Europe/London',
           }
-
           const profileData = await getProfileData(profileId, profileType, date)
           let days = Object.keys(profileData)
 
