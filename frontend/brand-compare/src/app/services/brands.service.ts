@@ -7,7 +7,7 @@ import { Brand } from '../Brand';
   providedIn: 'root',
 })
 export class BrandsService {
-  URL = 'http://localhost:3000/';
+  URL = 'http://localhost:3000/brands';
 
   constructor(private http: HttpClient) {}
 

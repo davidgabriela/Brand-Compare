@@ -1,5 +1,5 @@
 export interface Brand {
-  name: string;
+  brandName: string;
   totalProfiles: number;
   totalFans: number;
   totalEngagement: number;
