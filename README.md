@@ -8,9 +8,8 @@ npm i
 npm run start
 ```
 ```
-cd frontend
+cd frontend/brand-compare
 npm i
-cd brand-compare
 npm start
 ```
 npm 
