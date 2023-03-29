@@ -7,3 +7,16 @@
 .datepicker button{
   margin-top: 10px;
 }
+
+.table {
+  margin-top: 50px;
+}
+
+.spinner {
+  width: 100%;
+
+}
+
+.spinner > * {
+  margin: auto;
+}
