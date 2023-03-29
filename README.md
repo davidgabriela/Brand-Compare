@@ -25,6 +25,7 @@ Using get_profile_data for a twitter account has unexpected behaviour:
 2. Besides the entries for the days in the given range, more entries for days that are not in the range appear in the following format '[other_date]': { date: '[other_date]', following_change: 0 }
 
 Similar behaviour was found for instagram_profile for some ranges. For the following request:
+```
 {
     "id" : 1,
     "method" : "socialinsider_api.get_profile_data",
@@ -38,9 +39,10 @@ Similar behaviour was found for instagram_profile for some ranges. For the follo
         }
     }
 }
+```
 
 The response is: 
-
+```
 {
     "id": 1,
     "error": null,
@@ -82,3 +84,4 @@ The response is:
         }
     }
 }
+```
