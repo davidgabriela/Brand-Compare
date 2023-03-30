@@ -11,11 +11,6 @@ import { BrandsService } from './services/brands.service';
 })
 export class AppComponent implements OnInit {
   brands$: Observable<Brand[]> = new Observable();
-  date: { start: number; end: number } = {
-    start: 1608209422374,
-    end: 1608299422374,
-  };
-  dataSource: Brand[] = [];
 
   displayedColumns: string[] = [
     'brandName',
@@ -46,6 +41,6 @@ export class AppComponent implements OnInit {
     let startDate = this.range.value.start;
     let endDate = this.range.value.end;
 
-    this.brands$ = this.brandsService.getBrands(startDate, endDate);
+    this.getBrands(startDate, endDate);
   }
 }

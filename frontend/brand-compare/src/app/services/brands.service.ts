@@ -17,11 +17,14 @@ export class BrandsService {
   ): Observable<Brand[]> {
     let start = null;
     let end = null;
+
     if (startDate && endDate) {
       start = new Date(startDate).getTime();
       end = new Date(endDate).getTime();
     }
+
     console.log(`${this.URL}?start=${start}&end=${end}`);
+
     return this.http.get<Brand[]>(`${this.URL}?start=${start}&end=${end}`);
   }
 }
