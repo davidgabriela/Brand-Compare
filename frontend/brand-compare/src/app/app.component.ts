@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
   constructor(private brandsService: BrandsService) {}
 
   ngOnInit() {
-    //this.getBrands(this.date.start, this.date.end);
     this.getBrands(this.range.value.start, this.range.value.end);
   }
 
